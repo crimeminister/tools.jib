@@ -1,0 +1,9 @@
+;; tests.edn
+;;
+;; View test configuration using:
+;; $ bb test:config
+;;
+;; Execute tests:
+;; $ bb test:run
+
+#kaocha/v1 {}

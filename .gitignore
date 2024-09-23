@@ -1,0 +1,37 @@
+# .gitignore
+#
+# NB: Everything is ignored except things that are explicitly whitelisted.
+
+# Ignore everthing in root directory
+/*
+
+# Common project files
+!CHANGELOG.adoc
+!README.adoc
+!LICENSE
+
+# Clojure project & configuration
+!bb/
+!bb.edn
+!build.clj
+!deps.edn
+!pom.xml
+!dev/
+!docs/
+!resources/
+!src/
+!test/
+
+# Clojure tools
+!.cljstyle
+!.dir-locals.el
+!compose.yaml
+!Dockerfile
+!.dockerignore
+!Makefile
+!tests.edn
+
+# Git & CI workflow
+!.gitattributes
+!.gitignore
+!.github/

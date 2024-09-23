@@ -1,0 +1,137 @@
+{:min-bb "0.8.0"
+
+ :tasks
+ {:requires
+  [[babashka.classpath :as cp]
+   [babashka.cli :as cli]
+   [babashka.fs :as fs]
+   [clojure.edn :as edn]
+   [clojure.pprint :as pp]
+   [clojure.string :as s]]
+
+  :init
+  (do
+    ;; CLASSPATH
+
+    ;; Add shared code to classpath.
+    (cp/add-classpath "./bb")
+
+    ;; REQUIREMENTS
+    ;;(require '[foo.bar :as bar])
+
+    ;; DEFINITIONS
+
+    ;; The name of the library.
+    (def library-id "tools.jib")
+
+    ;; Icons!
+    (def emoji-lint "🧶")
+    (def emoji-test "🧪")
+    (def emoji-build "🔨")
+    (def emoji-sign "🪶")
+    (def emoji-deploy "🚀")
+
+    ;; Directories
+    (def src-dir (fs/path "src"))
+
+    ;; Invoke linter to collect configurations.
+    (def lint-init "-M:lint/kondo:lint/init")
+    ;; Invoke lint checker.
+    (def lint-check "-M:lint/kondo:lint/check")
+    ;; Invoke style checker to check source code format.
+    (def style-check "-M:style/task:style/check")
+    ;; Invoke style check to fix source code format.
+    (def style-fix "-M:style/task:style/fix")
+    ;; Aliases to use to invoke build tooling.
+    (def build-tool "-T:build/task")
+    ;; Aliases to use for printing configuration.
+    (def test-main "-M:test/env:test/run")
+    ;; Aliases to use to execute tests.
+    (def test-exec "-X:test/env:test/run")
+    ;; Aliases to run a Clojure REPL.
+    (def project-repl "-M:project/repl")
+    )
+
+  lint:init
+  {:doc "Collect lint configuration"
+   :task (clojure lint-init)}
+
+  lint:check
+  {:doc "Lint the project source code"
+   :task (clojure lint-check "--lint" src-dir)}
+
+  style:check
+  {:doc "Check code formatting using cljstyle"
+   :task (clojure style-check)}
+
+  style:fix
+  {:doc "Fix code formatting using cljstyle"
+   :task (clojure style-fix)}
+
+  project:config
+  {:doc "Print the project configuration"
+   :task (clojure build-tool "config")}
+
+  project:repl
+  {:doc "Run a Clojure REPL"
+   :task (clojure project-repl)}
+
+  test:config
+  {:doc "Print the test environment configuration"
+   :task (clojure test-main "--print-config")}
+
+  test:profile
+  {:doc "Profile unit test speed, showing three slowest tests"
+   :task (clojure test-exec "--plugin" "kaocha.plugin/profiling")}
+
+  test:prepare
+  {:doc "Prepare dependencies for test execution"
+   :depends [build:prepare]
+   :task (clojure "-P" test-exec)}
+
+  test:ci
+  {:doc "Run integration tests (marked with ^:integration)"
+   :depends [test:prepare]
+   :task (clojure test-exec "--focus-meta" ":integration")}
+
+  test:run
+  {:doc "Execute the test suite, stopping on first error"
+   :task (clojure test-exec)}
+
+  test:run-all
+  {:doc "Execute all tests in the test suite, ignoring failing tests"
+   :task (clojure test-exec :fail-fast? false)}
+
+  test:watch
+  {:doc "Run tests when changes saved, stopping test run on first error"
+   :task (clojure test-exec :watch? true)}
+
+  test:watch-all
+  {:doc "Run tests when changes saved, stopping test run on first error"
+   :task (clojure test-exec :fail-fast? false :watch? true)}
+
+  build:prepare
+  {:doc "Prepare dependencies for building without executing build"
+   :task (clojure "-P" build-tool)}
+
+  build:clean
+  {:doc "Remove build output or given directory"
+   :task (clojure build-tool "clean")}
+
+  build:scour
+  {:doc "Remove temporary miscellaneous build files"
+   :task (let [targets [(fs/path ".cpcache")
+                        (fs/path ".clj-kondo")
+                        (fs/path ".lsp")]]
+           (doseq [target targets]
+             (fs/delete-tree target)))}
+
+  build:config
+  {:doc "Pretty print the build configuration"
+   :task (clojure build-tool "config")}
+
+  build:uberjar
+  {:doc "Assemble an uberjar archive including dependencies and source code"
+   :task (clojure build-tool "uberjar")}
+
+  }}

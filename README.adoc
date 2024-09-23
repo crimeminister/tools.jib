@@ -1,0 +1,63 @@
+= tools.jib
+Robert Medeiros <robert@clojurist.ca>
+:description: Introduction to the tools.jib project
+:url-repo: https://github.com/crimeminister/tools.jib
+:toc:
+ifdef::env-github[]
+:imagesdir: ./
+:toc-placement!:
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+This is a Clojure wrapper around Google's https://github.com/GoogleContainerTools/jib[Jib] project for "building optimized Docker and OCI container images without a Docker daemon, and without deep mastery of Docker best-practices".
+
+This library was born from an attempt at using Jib from https://github.com/clojure/tools.build[tools.build].
+
+toc::[]
+
+== Status
+
+// TODO status badge(s) from GitHub Actions, elsewhere
+
+== Release Information
+
+https://clojure.org/reference/deps_and_cli[deps.edn] dependency information:
+
+As a Git dependency:
+
+[source,clojure]
+----
+io.github.clojure/tools.jib {:git/tag "v0.0.0" :git/sha "aaaaaaa"}
+----
+
+As a Maven dependency:
+
+[source,clojure]
+----
+io.github.clojure/tools.jib {:mvn/version "0.0.0"}
+----
+
+== Documentation
+
+* API
+
+* User Guide
+
+== Developer Information
+
+=== Running Tests
+
+[source,shell]
+----
+$ bb test:run
+----
+
+== Copyright and License
+
+Copyright © 2024 Robert Medeiros
+
+All rights reserved. The use and distribution terms for this software are covered by the https://opensource.org/license/epl-1-0[Eclipse Public License 1.0] which can be found in the file file:./LICENSE[LICENSE} at the root of this repository. By using this software in any fashion, you are agreeing to be bound by the terms of this license. You must not remove this notice, or any other, from this software.
