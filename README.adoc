@@ -23,6 +23,8 @@ toc::[]
 
 // TODO status badge(s) from GitHub Actions, elsewhere
 
+This library is currently a *work in progress*. Please do not rely on this for anything critical just yet.
+
 == Release Information
 
 https://clojure.org/reference/deps_and_cli[deps.edn] dependency information:
