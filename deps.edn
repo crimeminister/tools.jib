@@ -8,7 +8,7 @@
   {:mvn/version "1.12.0"}
   ;; A library for building Docker and OCI containers.
   com.google.cloud.tools/jib-core
-  {:mvn/version "0.27.1"}
+  {:mvn/version "0.27.2"}
   ;; Support classes for jib container build tool.
   com.google.cloud.tools/jib-build-plan
   {:mvn/version "0.4.0"}
