@@ -42,9 +42,9 @@
 (defmethod jib.image/containerizer :jib.type/tar-image
   [{:keys [jib/image-name jib/path]}]
   (let [image-name (have string? image-name)
-        path (have (or (string? path)
-                       (instance? File path)
-                       (instance? Path path)))
+        path (have #(or (string? %)
+                        (instance? File %)
+                        (instance? Path %)) path)
         image-ref (ImageReference/parse image-name)
         tar-img (-> (TarImage/at path) (.named image-ref))]
     (Containerizer/to tar-img)))
