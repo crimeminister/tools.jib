@@ -58,7 +58,7 @@
   :style/task
   {:extra-deps
    {mvxcvi/cljstyle {:git/url "https://github.com/greglook/cljstyle.git"
-                     :git/sha "9be5bb9ed678a1e73670a3df3ece08bb22362441"}}}
+                     :git/sha "a76919fcfadd03bd01a93d82aaf58b78cf806816"}}}
 
   ;; Report format issues for current project code:
   :style/check
