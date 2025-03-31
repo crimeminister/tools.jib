@@ -60,6 +60,6 @@ $ bb test:run
 
 == Copyright and License
 
-Copyright © 2024 Robert Medeiros
+Copyright © 2025 Robert Medeiros
 
 All rights reserved. The use and distribution terms for this software are covered by the https://opensource.org/license/epl-1-0[Eclipse Public License 1.0] which can be found in the file file:./LICENSE[LICENSE} at the root of this repository. By using this software in any fashion, you are agreeing to be bound by the terms of this license. You must not remove this notice, or any other, from this software.
